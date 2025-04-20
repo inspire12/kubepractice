@@ -5,18 +5,21 @@ grafana:
   enabled: true
   defaultDashboardsTimezone: Asia/Seoul
 
+  admin:
+    existingSecret: "" # 이 값을 비우거나 실제 존재하는 시크릿으로 설정
+
   ingress:
     enabled: true
     ingressClassName: nginx
-    annotations: 
+    annotations:
       nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
       nginx.ingress.kubernetes.io/ssl-passthrough: "true"
       cert-manager.io/cluster-issuer: "selfsigned-issuer"
     hosts:
       - grafana.myweb.com
     tls:
-      - hosts: 
-        - grafana.myweb.com
+      - hosts:
+          - grafana.myweb.com
         secretName: grafana.local-tls
 
   persistence:
@@ -35,8 +38,8 @@ kubeProxy:
 
   serviceMonitor:
     selector:
-     matchLabels:
-       k8s-app: kube-proxy
+      matchLabels:
+        k8s-app: kube-proxy
 
 prometheus:
   prometheusSpec:
@@ -52,10 +55,10 @@ prometheus:
     #   memory: 400Mi
 
     storageSpec:
-     volumeClaimTemplate:
-       spec:
-         storageClassName: longhorn
-         accessModes: ["ReadWriteOnce"]
-         resources:
-           requests:
-             storage: 3Gi
+      volumeClaimTemplate:
+        spec:
+          storageClassName: longhorn
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 3Gi
