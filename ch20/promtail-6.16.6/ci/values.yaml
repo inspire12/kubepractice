@@ -1,6 +1,10 @@
 # -- The name of the PriorityClass
 priorityClassName: system-node-critical
 
+configmap:
+  # -- If enabled, promtail config will be created as a ConfigMap instead of a secret
+  enabled: true
+
 defaultVolumes:
   - name: run
     hostPath:
