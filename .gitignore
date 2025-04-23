@@ -8,3 +8,6 @@ secret.yaml
 
 # ignore code workspace
 *.code-workspace
+
+# ignore python venv
+*kubespray-venv/

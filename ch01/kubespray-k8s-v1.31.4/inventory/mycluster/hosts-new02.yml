@@ -1,0 +1,34 @@
+all:
+  hosts:
+    ubun22-01:
+      ansible_host: ubun22-01                                                     
+    ubun22-02:
+      ansible_host: ubun22-02
+    ubun22-04:
+      ansible_host: ubun22-04
+    ubun22-05:
+      ansible_host: ubun22-05
+  children:
+    kube_control_plane:                                                                         
+      hosts:
+        ubun22-01:
+        ubun22-02:
+        ubun22-05:
+    kube_node:                                                                                              
+      hosts:
+        ubun22-01:
+        ubun22-02:
+        ubun22-04:
+        ubun22-05:
+    etcd:                                                                                         
+      hosts:
+        ubun22-01:
+        ubun22-02:
+        ubun22-05:
+    k8s_cluster:
+      children:
+        kube_control_plane:
+        kube_node:
+    calico_rr:  
+      hosts: {}
+
